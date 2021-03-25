@@ -1,0 +1,95 @@
+<!DOCTYPE>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>둥둥 - [[${article.title}]]</title>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- bulma -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma-rtl.min.css">
+
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
+        <!-- google font: noto sans kr -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+              rel="stylesheet">
+
+        <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+        <!-- open graph -->
+        <!--        <meta property="og:image" content="url"/>-->
+        <!--        <meta property="og:url" content="url"/>-->
+        <meta property="og:description" content="내 생각, 내 마음을 고이 담아 이 바다에 띄워 보냅니다"/>
+        <meta property="og:title" content="둥둥 - [[${article.title}]]"/>
+
+        <script>
+            article_id = [[${article.id}]];
+
+            function onClickRemove() {
+                $.ajax({
+                    type: "DELETE",
+                    url: `/api/articles/${article_id}`,
+                    success: function (response) {
+                        if (response['success'] === true) {
+                            window.location.href = "/";
+                        } else {
+                            alert("이미 삭제된 게시물입니다.");
+                            window.location.href = "/";
+                        }
+                    }
+
+                }); // end ajax
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+
+            <!-- hero -->
+            <header class="hero">
+                <div class="hero-body">
+                    <a href="/"><h1 class="title is-1 has-text-white">둥둥</h1></a>
+                    <h2 class="header is-1 has-text-white">내 생각, 내 마음을 고이 담아</h2>
+                    <h2 class="header is-1 has-text-white">이 바다에 띄워 보냅니다</h2>
+                </div>
+            </header>
+            <!-- end hero -->
+
+            <div class="card">
+                <div class="card-content">
+                    <p id="title" class="title">
+                        [[${article.title}]]
+                    </p>
+                    <p id="contents" class="subtitle">
+                        [[${article.contents}]]
+                    </p>
+                    <span id="modifiedAt">
+                [[${article.modifiedAt}]]
+            </span>
+                    <span>
+                -
+            </span>
+                    <span id="author">
+                [[${article.author}]]
+            </span>
+                </div>
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+              <span>
+                  <button onclick="onClickRemove()">
+                    <i class="far fa-trash-alt"></i>
+                  </button>
+              </span>
+                    </p>
+                </footer>
+            </div>
+
+        </div>
+    </body>
+</html>

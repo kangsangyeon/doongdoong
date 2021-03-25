@@ -1,0 +1,19 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #abdfff;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-attachment: fixed;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+.card:hover {
+    cursor: pointer;
+}

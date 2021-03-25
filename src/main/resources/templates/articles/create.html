@@ -1,0 +1,91 @@
+<!DOCTYPE>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>둥둥 - 게시물 수정</title>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- bulma -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma-rtl.min.css">
+
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
+        <!-- google font: noto sans kr -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+              rel="stylesheet">
+
+        <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+        <!-- open graph -->
+        <!--        <meta property="og:image" content="url"/>-->
+        <!--        <meta property="og:url" content="url"/>-->
+        <meta property="og:description" content="내 생각, 내 마음을 고이 담아 이 바다에 띄워 보냅니다"/>
+        <meta property="og:title" content="둥둥 - 게시물 수정"/>
+
+        <script>
+            function onClickSubmit() {
+                let title = $("#title").val();
+                let author = $("#author").val();
+                let contents = $("#contents").val();
+
+                let data = {"title": title, "author": author, "contents": contents};
+                let json_data = JSON.stringify(data);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/articles",
+                    contentType: "application/json",
+                    data: json_data,
+                    success: function (response) {
+                        if (response['success'] === true) {
+                            window.location.href = "/";
+                        }
+                    }
+
+                }); // end ajax
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+
+            <!-- hero -->
+            <header class="hero">
+                <div class="hero-body">
+                    <a href="/"><h1 class="title is-1 has-text-white">둥둥</h1></a>
+                    <h2 class="header is-1 has-text-white">내 생각, 내 마음을 고이 담아</h2>
+                    <h2 class="header is-1 has-text-white">이 바다에 띄워 보냅니다</h2>
+                </div>
+            </header>
+            <!-- end hero -->
+
+            <article>
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input id="title" class="input" type="text" placeholder="제목">
+                        <span class="icon is-small is-left">
+                    <i class="fas fa-heading"></i>
+                </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input id="author" class="input" type="text" placeholder="작성자">
+                        <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+                    </p>
+                </div>
+                <textarea id="contents" class="textarea" placeholder="내용을 입력하세요" rows="10"></textarea>
+                <button onclick="onClickSubmit()" class="button is-primary is-right">확인</button>
+            </article>
+
+        </div>
+    </body>
+</html>
