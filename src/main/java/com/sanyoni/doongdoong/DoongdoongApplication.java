@@ -14,7 +14,7 @@ import java.util.TimeZone;
 public class DoongdoongApplication {
 
     @PostConstruct
-    void PostConstructor(){
+    void PostConstructor() {
         // https://docs.oracle.com/javase/tutorial/datetime/iso/timezones.html
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
     }

@@ -34,13 +34,12 @@ public class ArticleController {
 
     @GetMapping("/articles/{id}")
     public String getArticleDetailsPage(@PathVariable Long id, Model model) {
-        try{
+        try {
             Article article = repository.findById(id).orElseThrow(() -> new NullPointerException("일치하는 ID의 게시물이 없습니다."));
             model.addAttribute("article", article);
 
             return "articles/details";
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             return "articles/404";
         }
 

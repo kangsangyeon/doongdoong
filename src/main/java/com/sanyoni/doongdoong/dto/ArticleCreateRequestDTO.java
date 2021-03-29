@@ -14,7 +14,7 @@ public class ArticleCreateRequestDTO {
 
     private final String contents;
 
-    public ArticleCreateRequestDTO(Article article){
+    public ArticleCreateRequestDTO(Article article) {
         this.title = article.getTitle();
         this.author = article.getAuthor();
         this.contents = article.getContents();
